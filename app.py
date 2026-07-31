@@ -55,7 +55,7 @@ with st.sidebar:
     )
 
     st.header("Lista manual (opcional)")
-    st.caption("Si la llenas, solo se generan estas combinaciones UR,Pp (ignora los filtros de arriba salvo el capítulo máximo y el MDP mínimo, que se siguen aplicando dentro de cada combinación). Un renglón por combinación, formato UR,Pp — ej. 923,S318")
+    st.caption("Si la llenas, solo se generan estas combinaciones UR,Pp. Un renglón por combinación, formato UR,Pp — ej. 923,S318")
     lista_manual_txt = st.text_area("UR,Pp por renglón", value="", height=100, label_visibility="collapsed")
 
     st.header("Periodo")
