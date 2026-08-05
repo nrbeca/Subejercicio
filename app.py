@@ -35,7 +35,7 @@ st.markdown(
 )
 
 st.title("Generador de Cuadros de Subejercicio — DGAPSGB")
-st.caption("Sube el MAP crudo (CSV o XLSX), ajusta los filtros y descarga el Excel con un cuadro por UR+Pp.")
+st.caption("Sube el MAP (CSV o XLSX), ajusta los filtros y descarga el Excel con un cuadro por UR+Pp.")
 
 # ── Sidebar: filtros ─────────────────────────────────────────────────────────
 with st.sidebar:
