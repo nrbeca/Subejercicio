@@ -1,5 +1,5 @@
 """
-app.py — Generador de Cuadros de Subejercicio (DGAPSGB)
+app.py — Generador de Cuadros de Subejercicio 
 ==========================================================
 Streamlit app: sube el MAP, ajusta los filtros, revisa el resumen general
 y descarga el Excel con un cuadro por cada UR+Pp.
