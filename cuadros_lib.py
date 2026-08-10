@@ -221,13 +221,17 @@ def agregar(df):
         ORI=('ORI', 'sum'), MOD=('MOD', 'sum'), EJE=('EJE', 'sum'), DISP=('DISP', 'sum'))
 
 
-def seleccionar(grp, disp_min, capitulo_max, lista_manual):
+def seleccionar(grp, disp_min, capitulo_min, capitulo_max, lista_manual):
     """
-    Un capítulo califica si CAPITULO <= capitulo_max (gasto corriente, excluye
-    Inversión >=5000 por default) y su disponible absoluto es >= disp_min.
-    Un UR+PP se incluye si le queda al menos un capítulo tras el filtro.
+    Un capítulo califica si capitulo_min <= CAPITULO <= capitulo_max
+    y su disponible absoluto es >= disp_min. Un UR+PP se incluye si le
+    queda al menos un capítulo tras el filtro.
     """
-    caps_ok = grp[(grp['CAPITULO'] <= capitulo_max) & (grp['DISP'] >= disp_min)].copy()
+    caps_ok = grp[
+        (grp['CAPITULO'] >= capitulo_min) &
+        (grp['CAPITULO'] <= capitulo_max) &
+        (grp['DISP'] >= disp_min)
+    ].copy()
     if lista_manual:
         def _norm(u):
             try:
