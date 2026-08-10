@@ -1,5 +1,5 @@
 """
-app.py — Generador de Cuadros de Subejercicio 
+app.py — Generador de Cuadros de Subejercicio (DGAPSGB)
 ==========================================================
 Streamlit app: sube el MAP, ajusta los filtros, revisa el resumen general
 y descarga el Excel con un cuadro por cada UR+Pp.
@@ -34,8 +34,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("Generador de Cuadros de Subejercicio")
-st.caption("Sube el MAP (CSV o XLSX), ajusta los filtros y descarga el Excel con un cuadro por UR+Pp.")
+st.title("Generador de Cuadros de Subejercicio — DGAPSGB")
+st.caption("Sube el MAP crudo (CSV o XLSX), ajusta los filtros y descarga el Excel con un cuadro por UR+Pp.")
 
 # ── Sidebar: filtros ─────────────────────────────────────────────────────────
 with st.sidebar:
@@ -48,6 +48,11 @@ with st.sidebar:
         min_value=0.0, value=1.0, step=0.1,
         help="Un capítulo se incluye solo si su disponible (Modificado − Ejercido) es mayor o igual a este monto, en millones de pesos."
     )
+    capitulo_min = st.number_input(
+        "Capítulo mínimo a considerar",
+        min_value=1000, max_value=9000, value=1000, step=1,
+        help="Los capítulos por debajo de este valor se excluyen (por default 1000, para incluir desde Servicios personales)."
+    )
     capitulo_max = st.number_input(
         "Capítulo máximo a considerar",
         min_value=1000, max_value=9000, value=4999, step=1,
@@ -55,7 +60,7 @@ with st.sidebar:
     )
 
     st.header("Lista manual (opcional)")
-    st.caption("Si la llenas, solo se generan estas combinaciones UR,Pp. Un renglón por combinación, formato UR,Pp — ej. 923,S318")
+    st.caption("Si la llenas, solo se generan estas combinaciones UR,Pp (ignora los filtros de arriba salvo el capítulo mínimo/máximo y el MDP mínimo, que se siguen aplicando dentro de cada combinación). Un renglón por combinación, formato UR,Pp — ej. 923,S318")
     lista_manual_txt = st.text_area("UR,Pp por renglón", value="", height=100, label_visibility="collapsed")
 
     st.header("Periodo")
@@ -105,7 +110,7 @@ with st.spinner("Leyendo y calculando…"):
         st.error(f"No se pudo leer el archivo: {e}")
         st.stop()
     grp = lib.agregar(df)
-    caps_sel = lib.seleccionar(grp, disp_minimo, capitulo_max, lista_manual)
+    caps_sel = lib.seleccionar(grp, disp_minimo, capitulo_min, capitulo_max, lista_manual)
 
 if caps_sel.empty:
     st.warning("No hay combinaciones que cumplan los filtros actuales.")
