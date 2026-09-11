@@ -355,7 +355,7 @@ def _mg(ws, r1, c1, r2, c2):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def generar_hoja(wb, ur, pp, caps_df, anio, periodo_label, fecha_corte_str, fecha_rep_str):
-    ur_key = int(ur) if str(ur).lstrip('-').isdigit() else ur
+    ur_key = str(ur).strip()
     ur_nombre = UR_NOMBRES.get(ur_key, str(ur))
     pp_nombre = PP_NOMBRES.get(pp, pp)
 
