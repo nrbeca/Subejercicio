@@ -74,7 +74,7 @@ PP_NOMBRES = {
 }
 
 UR_NOMBRES = {
-       '100': 'Secretaría',
+    '100': 'Secretaría',
     '110': 'Unidad de Asuntos Jurídicos, Derechos Humanos y Normalización',
     '111': 'Dirección General de Comunicación Social',
     '112': 'Dirección General de Enlace Legislativo',
