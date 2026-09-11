@@ -227,9 +227,9 @@ def leer_y_calcular(file_obj, filename, corte_mes):
 
     def map_ur(u):
         try:
-            return UR_MAP.get(int(u), str(u))
+            return str(UR_MAP.get(int(u), str(u)))
         except (ValueError, TypeError):
-            return UR_MAP.get(str(u).strip(), str(u).strip())
+            return str(UR_MAP.get(str(u).strip(), str(u).strip()))
 
     df['UR2'] = df['UNIDAD'].apply(map_ur)
     df['PP'] = df['IDEN_PROY'].astype(str).str.strip() + df['PROYECTO'].astype(str).str.zfill(3)
@@ -272,9 +272,9 @@ def seleccionar(grp, disp_min, capitulo_min, capitulo_max, lista_manual):
     if lista_manual:
         def _norm(u):
             try:
-                return UR_MAP.get(int(u), str(u))
+                return str(UR_MAP.get(int(u), str(u)))
             except (ValueError, TypeError):
-                return UR_MAP.get(str(u), str(u))
+                return str(UR_MAP.get(str(u), str(u)))
         norm = {(_norm(u), pp) for u, pp in lista_manual}
         mask = caps_ok.apply(lambda r: (r['UR2'], r['PP']) in norm, axis=1)
         return caps_ok[mask].copy()
